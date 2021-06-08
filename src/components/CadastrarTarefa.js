@@ -8,8 +8,23 @@ import {
 } from 'react-bootstrap';
 import { A, navigate } from 'hookrouter';
 
-
 export default function CadastrarTarefa() {
+    
+    const [task, setTask] = useState('');
+    const [formValidate, setFormValidate] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
+    const handleSubmit = event => {
+        event.preventDefault();
+    }
+    const handleChange = event => {
+        setTask(event.target.value);
+    }
+    const closeModal = () => {
+        navigate('/');
+    }
+
+
     return(
         <div>
             <h3 className="text-center">Cadastrar</h3>
@@ -19,7 +34,11 @@ export default function CadastrarTarefa() {
                     padding: '1rem'
                 }}
             >
-                <Form>
+                <Form 
+                    validated={ formValidate }
+                    noValidate
+                    onSubmit={ handleSubmit }
+                >
                     <Form.Group className="p-5">
                         <Form.Label>Tarefa</Form.Label>
                         <Form.Control 
@@ -28,7 +47,8 @@ export default function CadastrarTarefa() {
                             minLength="5"
                             maxLength="100"
                             required
-                            
+                            value={task}
+                            onChange={handleChange}
                         />
                         <Form.Control.Feedback type="invalid">
                             A Tarefa deve Conter ao menos 5 caracteres.
@@ -38,6 +58,7 @@ export default function CadastrarTarefa() {
                         <Button
                             type="submit"
                             variant="success"
+                            
                         >
                             Cadastrar
                         </Button>
@@ -46,7 +67,7 @@ export default function CadastrarTarefa() {
                     </Form.Group>
                 </Form>
             </Jumbotron>
-            <Modal show={false}>
+            <Modal show={showModal}>
                 <Modal.Header>
                     <Modal.Title>Sucesso!</Modal.Title>
                 </Modal.Header>
@@ -54,7 +75,7 @@ export default function CadastrarTarefa() {
                     Tarefa adicionada com sucesso!!
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success">Continuar</Button>
+                    <Button variant="success" onClick={closeModal}>Continuar</Button>
                 </Modal.Footer>
             </Modal>
         </div>
