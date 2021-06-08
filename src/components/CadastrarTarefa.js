@@ -8,6 +8,8 @@ import {
 } from 'react-bootstrap';
 import { A, navigate } from 'hookrouter';
 
+import Task from '../models/task.model';
+
 export default function CadastrarTarefa() {
     
     const [task, setTask] = useState('');
@@ -16,6 +18,19 @@ export default function CadastrarTarefa() {
 
     const handleSubmit = event => {
         event.preventDefault();
+        setFormValidate(true);
+        
+        if (event.currentTarget.checkValidity() === true) {
+            // get tasks 
+            const tasksDb = localStorage['tasks'];
+            const tasks = tasksDb ? JSON.parse(tasksDb) : []; //convert to Json of localStorage
+            
+            //persister task
+            tasks.push(new Task(new Date().getTime(), task, false));
+            localStorage['tasks'] = JSON.stringify(tasks); //convert to text to localStorage
+            
+            setShowModal(true);
+        }
     }
     const handleChange = event => {
         setTask(event.target.value);
