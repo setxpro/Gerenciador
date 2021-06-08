@@ -46,6 +46,17 @@ export default function CadastrarTarefa() {
                     </Form.Group>
                 </Form>
             </Jumbotron>
+            <Modal show={false}>
+                <Modal.Header>
+                    <Modal.Title>Sucesso!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Tarefa adicionada com sucesso!!
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success">Continuar</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
