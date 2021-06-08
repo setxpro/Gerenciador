@@ -1,5 +1,3 @@
-# Getting Started with Create React App
-
 ## Gerenciador de Tarefas
 
 ### ☄️ Descrição ☄️
