@@ -1,19 +1,17 @@
 import { useState } from 'react';
-import { 
-    Button,
-    Form,
-    Jumbotron,
-    Modal,
-    Spinner
-} from 'react-bootstrap';
-import { A, navigate } from 'hookrouter';
 
+import './Cadastrar.css';
+import { A, navigate } from 'hookrouter';
 import Task from '../models/task.model';
+
+import { Button, Form, Jumbotron, Modal, Spinner } from 'react-bootstrap';
+
 
 export default function CadastrarTarefa() {
     
     const [task, setTask] = useState('');
     const [formValidate, setFormValidate] = useState(false);
+    const [spinner, setSpinner] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
     const handleSubmit = event => {
@@ -29,6 +27,7 @@ export default function CadastrarTarefa() {
             tasks.push(new Task(new Date().getTime(), task, false));
             localStorage['tasks'] = JSON.stringify(tasks); //convert to text to localStorage
             
+            setSpinner(true);
             setShowModal(true);
         }
     }
@@ -73,9 +72,11 @@ export default function CadastrarTarefa() {
                         <Button
                             type="submit"
                             variant="success"
-                            
                         >
-                            Cadastrar
+                            <span className={ spinner ? null : 'hidden' }>
+                                <Spinner animation="border" size="sm"/>
+                                </span>
+                            <span className={ spinner ? 'hidden' : null } >Cadastrar</span>
                         </Button>
                         &nbsp;
                         <A href="/" className="btn btn-info" style={{color: '#fff'}}>Voltar</A>
