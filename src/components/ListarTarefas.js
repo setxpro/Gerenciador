@@ -44,7 +44,10 @@ export default function ListarTarefas() {
                     </tr>
                 </thead>
                 <tbody>
-                    <ItensListTasks tasks={tasks}/>
+                    <ItensListTasks 
+                        tasks={tasks}
+                        loadTask={setLoadTask}
+                    />
                 </tbody>
             </Table>
         </div>
