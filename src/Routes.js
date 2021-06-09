@@ -1,6 +1,6 @@
-import ListarTarefas from './components/ListarTarefas';
-import CadastrarTarefa from './components/CadastrarTarefa';
-import AtualizarTarefa from './components/AtualizarTarefa';
+import ListarTarefas from './components/Listar/ListarTarefas';
+import CadastrarTarefa from './components/Cadastrar/CadastrarTarefa';
+import AtualizarTarefa from './components/Listar/AtualizarTarefa';
 
 export const  routes = {
     '/': () => <ListarTarefas/>,

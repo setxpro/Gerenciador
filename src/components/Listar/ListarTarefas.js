@@ -7,17 +7,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import ItensListTasks from './itensTarefas';
 
+import Paginacao from './Paginacao';
+
 export default function ListarTarefas() {
+
+    const ITENS_PER_PAGE = 3;
 
     const [tasks, setTasks] = useState([]);
     const [loadTask, setLoadTask] = useState(true);
+    const [totailItem, setTotailItem] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         function getTasks() {
             const tasksDb = localStorage['tasks'];
             let listTasks = tasksDb ? JSON.parse(tasksDb) : []; //convert object with parse
-            setTasks(listTasks);
-            console.log(listTasks);
+            setTotailItem(listTasks.length);
+            setTasks(listTasks.splice((currentPage - 1) * ITENS_PER_PAGE, ITENS_PER_PAGE));
         }
         
         if (loadTask) {
@@ -25,7 +31,12 @@ export default function ListarTarefas() {
             setLoadTask(false);
         }
     
-    }, [loadTask]);
+    }, [loadTask, currentPage]);
+
+    function handlechangePage(page) {
+        setCurrentPage(page);
+        setLoadTask(true);
+    }
 
     return(
         <div className="text-center">
@@ -50,6 +61,12 @@ export default function ListarTarefas() {
                     />
                 </tbody>
             </Table>
+            <Paginacao
+                totailItem={totailItem}
+                itensforPage={ITENS_PER_PAGE}
+                currentPage={currentPage}
+                changePage={handlechangePage}
+            />
         </div>
     );
 }

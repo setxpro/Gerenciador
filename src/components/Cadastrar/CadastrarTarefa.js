@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import './Cadastrar.css';
+import '../Listar/Cadastrar.css';
 import { A, navigate } from 'hookrouter';
-import Task from '../models/task.model';
+import Task from '../../models/task.model';
 
 import { Button, Form, Jumbotron, Modal, Spinner } from 'react-bootstrap';
 
