@@ -7,8 +7,8 @@
     Os dados serão guardados no localStorage.
 </p>
 
-<img src="home.jpg" alt="home page" width="100%"/>
-<img src="cadastrar.jpg" alt="page register" width="100%">
+<img src="./public/home.jpg" alt="home page" width="100%"/>
+<img src="./public/cadastrar.jpg" alt="page register" width="100%">
 
 ### 🌌 Tecnologias 🌌
 
