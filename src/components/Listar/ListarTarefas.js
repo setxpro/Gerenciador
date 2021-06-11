@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { A } from "hookrouter";
 
-import { Table } from "react-bootstrap";
+import { Table, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import ItensListTasks from "./itensTarefas";
@@ -19,11 +19,16 @@ export default function ListarTarefas() {
   const [currentPage, setCurrentPage] = useState(1);
   const [orderAsc, setOrderAsc] = useState(false);
   const [orderDesc, setOrderDesc] = useState(false);
+  const [filterTask, setFilterTask] = useState("");
 
   useEffect(() => {
     function getTasks() {
       const tasksDb = localStorage["tasks"];
       let listTasks = tasksDb ? JSON.parse(tasksDb) : []; //convert object with parse
+      //filter
+      listTasks = listTasks.filter(
+        (t) => t.name.toLowerCase().indexOf(filterTask.toLowerCase()) === 0
+      );
       //ordenation
       if (orderAsc) {
         listTasks.sort((t1, t2) =>
@@ -45,7 +50,7 @@ export default function ListarTarefas() {
       getTasks();
       setLoadTask(false);
     }
-  }, [loadTask, currentPage, orderAsc, orderDesc]);
+  }, [loadTask, currentPage, orderAsc, orderDesc, filterTask]);
 
   function handlechangePage(page) {
     setCurrentPage(page);
@@ -68,6 +73,11 @@ export default function ListarTarefas() {
     setLoadTask(true);
   };
 
+  const handleFilterChange = (event) => {
+    setFilterTask(event.target.value);
+    setLoadTask(true);
+  };
+
   return (
     <div className="text-center">
       <h3>Tarefas a fazer</h3>
@@ -86,6 +96,17 @@ export default function ListarTarefas() {
                 &nbsp;Nova Tarefa
               </A>
             </th>
+          </tr>
+          <tr>
+            <th>
+              <Form.Control
+                type="text"
+                value={filterTask}
+                onChange={handleFilterChange}
+                className="filter-task"
+              />
+            </th>
+            <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>

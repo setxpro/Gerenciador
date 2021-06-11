@@ -1,8 +1,19 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 .ContainerTarefas h1 {
-    text-align: center;
+  text-align: center;
+}
+.filter-task {
+  width: 50% !important;
+  margin-left: 25%;
+}
+.hidden {
+  display: none;
+}
+.area-b {
+  display: flex;
+  justify-content: space-between;
 }
